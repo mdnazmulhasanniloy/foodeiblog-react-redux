@@ -20,7 +20,7 @@ const PostCard = ({blog}) => {
                     <h2 className="card-title mb-4">{blog?.title}</h2>
                     <p className='mt-3 mb-4 text-md'>{blog?.description?.slice(0, 50)} ...</p>
                     <div className="card-actions justify-start">
-                    <Link to={`/details/${blog?._id}`} className="text-lg px-4 py-2 bg-black text-white hover:bg-white hover:text-black transition-all duration-700">
+                    <Link to={`/details/${blog?._id}`} className="text-lg px-4 py-2 border-2 bg-black text-white hover:border-black hover:bg-white hover:text-black transition-all duration-700">
                         Read More <BsArrowRight className="inline ml-2" />
                     </Link>
                     </div>

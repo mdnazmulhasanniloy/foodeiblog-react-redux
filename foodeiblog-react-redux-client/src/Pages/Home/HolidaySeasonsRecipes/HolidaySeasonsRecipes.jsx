@@ -1,10 +1,15 @@
 import React from 'react';
 import bg_2  from '../../../Assets/Carousel_Image/bg_2.jpg';      
 import Card from '../../../Components/Card';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { sortByCategory } from '../../../Redux/Action/FilterAction';
 
 const HolidaySeasonsRecipes = () => {
+    const dispatch = useDispatch();
     const post = [1,2]
-    const categories = [1,2,3]
+    const categories = useSelector((state)=>state?.categories?.category)
+    console.log("categories", categories)
     return (
         <div className='w-full my-10'>
             <div className="flex items-end gap-2">
@@ -26,11 +31,11 @@ const HolidaySeasonsRecipes = () => {
                     <div className="title mb-5 text-3xl font-bold">Categories</div>
                     <div className="grid grid-cols-1 w-11/12 mx-auto gap-5">
                         {
-                            categories.map((item, index) =><div className="relative h-[140px]" key={index}>
-                                <img src={bg_2} className="w-full h-full object-cover" alt="" />
+                            categories?.map((category) =><div className="relative h-[140px]" key={category?._id}>
+                                <img src={category?.img} className="w-full h-full object-cover" alt="" />
                                 <div className="w-full h-full bg-[#00000041] absolute top-0 left-0 z-1 "></div>
                                 <div className="absolute top-[40%] left-[40%]">
-                                    <div className="title text-2xl font-bold text-white text-center">Foods</div>
+                                    <Link to="/blogs" onClick={()=>dispatch(sortByCategory(category?.value))} className="title text-2xl font-bold text-white text-center hover:cursor-pointer hover:text-white/70">{category?.name}</Link>
                                 </div>
                             </div>)
                         }

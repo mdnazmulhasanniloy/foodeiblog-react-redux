@@ -26,6 +26,7 @@ const run = async()=>{
 
         //db table 
         const blogsCollection = client.db(`${process.env.DB_USER}`).collection("blogs");
+        const categoriesCollection = client.db(`${process.env.DB_USER}`).collection("categories");
  
 
 
@@ -52,6 +53,15 @@ const run = async()=>{
             res.send({ status: true, data: product });
           });
 
+
+          //Categories
+
+          app.get("/categories", async(req, res) => {
+            const categories = await categoriesCollection.find({}).toArray();
+            res.send({ status: true, data: categories });
+
+
+          })
 
 
 

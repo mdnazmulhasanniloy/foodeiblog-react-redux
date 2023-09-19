@@ -2,7 +2,6 @@ import {LOAD_BLOGS } from "../ActionTypes/ActionTypes";
 
 const initialState = {
     blogs: [],
-    users: [],
   };
 
   export const blogsReducer = (state = initialState, action) => {

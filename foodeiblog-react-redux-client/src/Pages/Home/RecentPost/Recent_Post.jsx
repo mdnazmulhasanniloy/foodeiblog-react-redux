@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 
 const RecentPost = () => {
     const blogs = useSelector(state=>state.blogs.blogs); 
-    console.log(blogs)
+    // console.log(blogs)
     
 
     
@@ -37,7 +37,7 @@ const RecentPost = () => {
             <div className="w-full md:w-50% md:h-full">
                 <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4 w-11/12 mx-auto">
                     {
-                       blogs?.length>0 && blogs.map((blog) => (
+                       blogs?.length>0 && blogs?.sort((a, b)=>new Date(b?.create_at) - new Date(a?.create_at))?.slice(1, 5)?.map((blog) => (
                             <PostCard key={blog?._id} blog={blog} />
                         ))
                     }

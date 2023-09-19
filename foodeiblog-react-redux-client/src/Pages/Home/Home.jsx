@@ -7,12 +7,14 @@ import AboutStories from '../../Components/AboutStories/AboutStories';
 import Subscribe from '../../Components/Subscribe/Subscribe';
 import loadBlogsData from '../../Redux/Thunk/FetchBlogs';
 import { useDispatch } from 'react-redux';
+import loadCategoriesData from '../../Redux/Thunk/FetchCategories';
 
 const Home = () => {
     const dispatch = useDispatch()
 
     useEffect(()=>{
         dispatch(loadBlogsData())
+        dispatch(loadCategoriesData())
     },[dispatch])
     return (
         <div className='mt-5'>

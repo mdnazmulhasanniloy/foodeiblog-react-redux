@@ -3,16 +3,21 @@ import PostCard from '../../Components/PostCard';
 import Subscribe from '../../Components/Subscribe/Subscribe';
 import { useDispatch, useSelector } from 'react-redux';
 import loadBlogsData from '../../Redux/Thunk/FetchBlogs';
-import { clearFilter, sortByCategory, sortByTime } from '../../Redux/Action/FilterAction';
+import { sortByCategory } from '../../Redux/Action/FilterAction';
+import loadCategoriesData from './../../Redux/Thunk/FetchCategories';
 
 const Blogs = () => {
     const dispatch = useDispatch();
-    const blogs = useSelector(state=>state.blogs.blogs);
-    const filter = useSelector(state=>state.filter.filters);
+    const blogs = useSelector(state=>state?.blogs?.blogs);
+    const filter = useSelector(state=>state?.filter?.filters);
+    const categories = useSelector(state=>state?.categories?.category);
     const {category}=filter; 
+
+    console.log("categories", categories)
     
     useEffect(()=>{
         dispatch(loadBlogsData())
+        dispatch(loadCategoriesData())
     },[dispatch])
 
     let content;
@@ -23,7 +28,7 @@ const Blogs = () => {
 
     if (blogs?.length && category.length) {
         content = blogs?.filter(blog =>{
-            if(category === "All Blogs"){
+            if(category === "all_blogs"){
                 return blog
             }
             else if(category){
@@ -38,12 +43,15 @@ const Blogs = () => {
     return (
         <div className='min-h-[100vh] w-full mt-3'>
             <div className='mb-10 flex justify-end gap-5'>  
+                <div className="search">
+                <input type="search" placeholder="Search Here" className="input input-bordered input-warning w-full max-w-xs rounded-full" />
+                </div>
                 <select className="select select-warning rounded-full"  onChange={(e)=>dispatch(sortByCategory(e.target.value))}>
-                    <option disabled selected>Sort by category</option>
-                    <option>All Blogs</option>
-                    <option>Foods</option>
-                    <option>Life Style</option> 
-                    <option>Other</option> 
+                    <option selected value="all_blogs">All Blogs</option>
+                    {
+                        categories.map((category)=><option key={category?._id} value={category?.value} selected={filter?.category===category?.value}>{category?.name}</option>)
+                    }
+                    
                 </select>  
             </div>
                 <div className="my-10 w-11/12 mx-auto">
