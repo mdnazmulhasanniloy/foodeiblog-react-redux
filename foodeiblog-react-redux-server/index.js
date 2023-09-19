@@ -40,6 +40,19 @@ const run = async()=>{
           });
 
 
+         app.get("/blogs/:_id", async (req, res) => {
+            const id = req.params._id;
+            console.log(id)
+            const query = {
+                _id: new ObjectId(id)
+            }
+            const cursor = blogsCollection.findOne(query);
+            const product = await cursor;
+      
+            res.send({ status: true, data: product });
+          });
+
+
 
 
 

@@ -1,9 +1,8 @@
-import { CLEAR_FILTER, SORT_BY_CATEGORY, SORT_BY_TIME } from "../ActionTypes/ActionTypes"
+import { SORT_BY_CATEGORY } from "../ActionTypes/ActionTypes"
 
 export const initialState={
     filters:{
-        category: "",
-        create_at: "",
+        category: "", 
     }, 
 }
 
