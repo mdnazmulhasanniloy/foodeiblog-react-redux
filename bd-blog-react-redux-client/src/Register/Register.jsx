@@ -27,6 +27,10 @@ const Register = () => {
         }
     },[token, from, navigate])
 
+    if(error){
+        toast.error(error);
+    }
+
 
     
     const onSubmit = (data) => {
